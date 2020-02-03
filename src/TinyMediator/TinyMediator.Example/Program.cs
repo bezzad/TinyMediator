@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Ninject;
 using Ninject.Extensions.Conventions;
 using Ninject.Planning.Bindings.Resolvers;
+using TinyMediator.Example.Models;
 
 namespace TinyMediator.Example
 {

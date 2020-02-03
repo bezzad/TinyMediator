@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TinyMediator.Example
+namespace TinyMediator.Example.Models
 {
     public class ConstrainedPingedHandler<TSignal> : ISignalHandler<TSignal>
         where TSignal : Pinged

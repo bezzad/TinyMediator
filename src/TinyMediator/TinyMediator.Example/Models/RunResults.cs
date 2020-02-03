@@ -1,4 +1,4 @@
-﻿namespace TinyMediator.Example
+﻿namespace TinyMediator.Example.Models
 {
     public class RunResults
     {
