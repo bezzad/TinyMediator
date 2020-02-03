@@ -5,10 +5,10 @@ namespace TinyMediator.Example
 {
     public static class BindingExtensions
     {
-        public static IBindingInNamedWithOrOnSyntax<object> WhenNotificationMatchesType<TNotification>(this IBindingWhenSyntax<object> syntax)
-            where TNotification : ISignal
+        public static IBindingInNamedWithOrOnSyntax<object> WhenSignalMatchesType<TSignal>(this IBindingWhenSyntax<object> syntax)
+            where TSignal : ISignal
         {
-            return syntax.When(request => typeof(TNotification).IsAssignableFrom(request.Service.GenericTypeArguments.Single()));
+            return syntax.When(request => typeof(TSignal).IsAssignableFrom(request.Service.GenericTypeArguments.Single()));
         }
     }
 }

@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace TinyMediator.Example
 {
-    public class ConstrainedPingedHandler<TNotification> : ISignalHandler<TNotification>
-        where TNotification : Pinged
+    public class ConstrainedPingedHandler<TSignal> : ISignalHandler<TSignal>
+        where TSignal : Pinged
     {
         private readonly TextWriter _writer;
 
@@ -14,7 +14,7 @@ namespace TinyMediator.Example
             _writer = writer;
         }
 
-        public Task Handle(TNotification notification, CancellationToken cancellationToken)
+        public Task Handle(TSignal notification, CancellationToken cancellationToken)
         {
             return _writer.WriteLineAsync("Got pinged constrained async.");
         }
