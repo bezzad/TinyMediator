@@ -15,9 +15,7 @@ namespace TinyMediator.Example
         {
             var writer = new WrappingWriter(Console.Out);
             var mediator = BuildMediator(writer);
-
             
-
             return Runner.Run(mediator, writer, "Ninject");
         }
 
@@ -31,6 +29,7 @@ namespace TinyMediator.Example
             kernel.Bind<IMediator>().To<Mediator>();
             kernel.Bind(scan => scan.FromAssemblyContaining<Ping>().SelectAllClasses().InheritedFrom(typeof(ISignalHandler<>)).BindAllInterfaces());
             kernel.Bind(typeof(ISignalHandler<>)).To(typeof(ConstrainedPingedHandler<>)).WhenSignalMatchesType<Pinged>();
+            kernel.Bind(typeof(ISignalHandler<>)).To(typeof(MessageHandler<>)).WhenSignalMatchesType<Message>();
             kernel.Bind<ServiceFactory>().ToMethod(ctx => t => ctx.Kernel.TryGet(t));
             
             var mediator = kernel.Get<IMediator>();

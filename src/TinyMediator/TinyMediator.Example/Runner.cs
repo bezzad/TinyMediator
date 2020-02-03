@@ -14,6 +14,11 @@ namespace TinyMediator.Example
             await writer.WriteLineAsync("===============");
             await writer.WriteLineAsync();
 
+            await writer.WriteLineAsync("Publishing Message...");
+            ISignal signal = new Message() {Text = "I'm a signal message body"};
+            await mediator.Publish(signal);
+            await writer.WriteLineAsync();
+
             await writer.WriteLineAsync("Publishing Pinged...");
             await mediator.Publish(new Pinged());
             await writer.WriteLineAsync();

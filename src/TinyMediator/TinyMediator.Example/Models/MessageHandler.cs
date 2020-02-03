@@ -4,19 +4,19 @@ using System.Threading.Tasks;
 
 namespace TinyMediator.Example.Models
 {
-    public class ConstrainedPingedHandler<TSignal> : ISignalHandler<TSignal>
-        where TSignal : Pinged
+    public class MessageHandler<TSignal> : ISignalHandler<TSignal>
+        where TSignal : Message
     {
         private readonly TextWriter _writer;
 
-        public ConstrainedPingedHandler(TextWriter writer)
+        public MessageHandler(TextWriter writer)
         {
             _writer = writer;
         }
 
         public Task Handle(TSignal signal, CancellationToken cancellationToken)
         {
-            return _writer.WriteLineAsync("Got pinged constrained async.");
+            return _writer.WriteLineAsync($"Got message async: {signal.Text}");
         }
     }
 }
