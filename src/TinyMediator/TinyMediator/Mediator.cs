@@ -12,7 +12,6 @@ namespace TinyMediator
     public class Mediator : IMediator
     {
         private readonly ServiceFactory _serviceFactory;
-        private static readonly ConcurrentDictionary<Type, object> RequestHandlers = new ConcurrentDictionary<Type, object>();
         private static readonly ConcurrentDictionary<Type, SignalHandlerWrapper> SignalHandlers = new ConcurrentDictionary<Type, SignalHandlerWrapper>();
 
         /// <summary>
