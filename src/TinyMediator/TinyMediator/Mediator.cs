@@ -11,8 +11,8 @@ namespace TinyMediator
     /// </summary>
     public class Mediator : IMediator
     {
-        private readonly ServiceFactory _serviceFactory;
-        private static readonly ConcurrentDictionary<Type, SignalHandlerWrapper> SignalHandlers = new ConcurrentDictionary<Type, SignalHandlerWrapper>();
+        private ServiceFactory ServiceFactory { get; }
+        private static ConcurrentDictionary<Type, SignalHandlerWrapper> SignalHandlers { get; } = new ConcurrentDictionary<Type, SignalHandlerWrapper>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Mediator"/> class.
@@ -20,7 +20,7 @@ namespace TinyMediator
         /// <param name="serviceFactory">The single instance factory.</param>
         public Mediator(ServiceFactory serviceFactory)
         {
-            _serviceFactory = serviceFactory;
+            ServiceFactory = serviceFactory;
         }
 
 
@@ -49,7 +49,7 @@ namespace TinyMediator
 
             throw new ArgumentException($"{nameof(signal)} does not implement ${nameof(ISignal)}");
         }
-
+        
         /// <summary>
         /// Override in a derived class to control how the tasks are awaited. By default the implementation is a foreach and await of each handler
         /// </summary>
@@ -71,7 +71,7 @@ namespace TinyMediator
             var handler = SignalHandlers.GetOrAdd(signalType,
                 t => (SignalHandlerWrapper)Activator.CreateInstance(typeof(SignalHandlerWrapperImpl<>).MakeGenericType(signalType)));
 
-            return handler.Handle(signal, cancellationToken, _serviceFactory, PublishCore);
+            return handler.Handle(signal, cancellationToken, ServiceFactory, PublishCore);
         }
     }
 }
